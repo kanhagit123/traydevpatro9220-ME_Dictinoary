@@ -14,7 +14,8 @@ export default function App() {
     e.preventDefault()
     const q = query.trim()
     if (q === '') {
-      setResult({ found: false, empty: true })
+      
+      setResult({ found: false })
       return
     }
     const found = dictionary.find(item => item.word.toLowerCase() === q.toLowerCase())
@@ -27,8 +28,7 @@ export default function App() {
 
   return (
     <div className="container">
-      {/* ✅ Match test expectation */}
-      <h1>Dictionary App</h1>  
+      <h1>Dictionary App</h1>
 
       <form onSubmit={handleSearch} className="search-form">
         <input
@@ -42,24 +42,16 @@ export default function App() {
       </form>
 
       <div className="result">
+      
+        <h3>Definition:</h3>
         {result === null ? (
-          <p className="hint">Type a word and click Search to see its definition.</p>
+          
+          <p>Word not found in the dictionary.</p>
         ) : result.found ? (
-          <>
-            {/* ✅ Always render heading so Cypress can find it */}
-            <h3>Definition:</h3>
-            <p>{result.meaning}</p>
-          </>
-        ) : result.empty ? (
-          <>
-            <h3>Definition:</h3>
-            <p>No word entered.</p>
-          </>
+          <p>{result.meaning}</p>
         ) : (
-          <>
-            <h3>Definition:</h3>
-            <p>Word not found in the dictionary.</p>
-          </>
+          
+          <p>Word not found in the dictionary.</p>
         )}
       </div>
     </div>
